@@ -70,7 +70,6 @@ def display_list(values: List[str], display_limit: int) -> str:
         Branch_coverage_dl["display_list_3"] = True
         display_string = ", ".join(f"{value}" for value in values[:display_limit])
         display_string += and_n_others(values, display_limit)
-    print_coverage_dl()
     return display_string
 
 def print_coverage_dl():
