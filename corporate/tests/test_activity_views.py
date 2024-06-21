@@ -6,6 +6,8 @@ from unittest import mock
 from django.utils.timezone import now as timezone_now
 
 from corporate.lib.activity import get_remote_server_audit_logs
+from corporate.lib.activity import get_plan_rate_percentage
+from corporate.lib.activity import print_coverage_gprp
 from corporate.lib.stripe import add_months
 from corporate.models import Customer, CustomerPlan, LicenseLedger
 from zerver.lib.test_classes import ZulipTestCase
@@ -370,3 +372,20 @@ class ActivityTest(ZulipTestCase):
         with self.assert_database_query_count(11):
             result = self.client_get("/activity/remote")
             self.assertEqual(result.status_code, 200)
+
+    def test(self):
+        input1 = "0"
+        input2 = "50"
+        input3 = "35.5"
+        result = get_plan_rate_percentage(input1)
+        print_coverage_gprp()
+        assert result == "100%"
+
+        result = get_plan_rate_percentage(input2)
+        print_coverage_gprp()
+        assert result == "50%"
+        
+        result = get_plan_rate_percentage(input3)
+        print_coverage_gprp()
+        assert result == "64.50%"
+        

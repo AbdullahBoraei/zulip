@@ -18,6 +18,8 @@ from zerver.actions.create_user import do_reactivate_user
 from zerver.actions.realm_settings import do_deactivate_realm
 from zerver.actions.user_settings import do_change_user_setting
 from zerver.actions.users import change_user_is_active, do_deactivate_user
+from zerver.lib.templates import display_list
+from zerver.lib.templates import print_coverage_dl
 from zerver.decorator import (
     authenticate_internal_api,
     authenticated_json_view,

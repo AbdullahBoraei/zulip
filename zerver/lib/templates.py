@@ -62,7 +62,6 @@ def display_list(values: List[str], display_limit: int) -> str:
         # More than `display_limit` values, only mention a few.
         display_string = ", ".join(f"{value}" for value in values[:display_limit])
         display_string += and_n_others(values, display_limit)
-
     return display_string
 
 
