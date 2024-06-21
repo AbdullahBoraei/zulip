@@ -1646,3 +1646,21 @@ class ClientTestCase(ZulipTestCase):
         # client_name has the full name still, though
         self.assertEqual(client_name, "very-long-name-goes-here-and-still-works")
         self.assert_length(queries, 0)
+
+class TestDisplayList(ZulipTestCase):
+    def test_display_list(self):
+        input1 = ["John"]
+        input2 = ["John", "Rick", "Jessica"]
+        input3 = ["May", "Clarkson", "Hammond"]
+
+        result = display_list(input1, 1)
+        print_coverage_dl()
+        assert result == "John"
+
+        result = display_list(input2, 4)
+        print_coverage_dl()
+        assert result == "John, Rick and Jessica"
+
+        result = display_list(input3, 2)
+        print_coverage_dl()
+        assert result == "May, Clarkson and 1 other"
