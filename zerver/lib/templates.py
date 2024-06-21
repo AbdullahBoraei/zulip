@@ -37,6 +37,11 @@ def and_n_others(values: List[str], limit: int) -> str:
         "" if len(values) == limit + 1 else "s",
     )
 
+Branch_coverage_dl = {
+    "display_list_1":False,
+    "display_list_2":False,
+    "display_list_3":False
+}
 
 @register.filter(name="display_list", is_safe=True)
 def display_list(values: List[str], display_limit: int) -> str:
@@ -53,17 +58,27 @@ def display_list(values: List[str], display_limit: int) -> str:
     """
     if len(values) == 1:
         # One value, show it.
+        Branch_coverage_dl["display_list_1"] = True
         display_string = f"{values[0]}"
     elif len(values) <= display_limit:
+        Branch_coverage_dl["display_list_2"] = True
         # Fewer than `display_limit` values, show all of them.
         display_string = ", ".join(f"{value}" for value in values[:-1])
         display_string += f" and {values[-1]}"
     else:
         # More than `display_limit` values, only mention a few.
+        Branch_coverage_dl["display_list_3"] = True
         display_string = ", ".join(f"{value}" for value in values[:display_limit])
         display_string += and_n_others(values, display_limit)
+    print_coverage_dl()
     return display_string
 
+def print_coverage_dl():
+    for branch, hit in Branch_coverage_dl.items():
+        print(f"{branch} was {'hit' if hit else 'not hit'}")
+    Branch_coverage_dl["display_list_1"] = False
+    Branch_coverage_dl["display_list_2"] = False
+    Branch_coverage_dl["display_list_3"] = False
 
 md_extensions: Optional[List[markdown.Extension]] = None
 md_macro_extension: Optional[markdown.Extension] = None
