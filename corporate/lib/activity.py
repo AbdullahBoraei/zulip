@@ -169,7 +169,6 @@ def get_plan_rate_percentage(discount: Optional[str]) -> str:
 
     if discount is None or discount == "0":
         Branch_coverage_gprp["get_plan_rate_percentage_1"] = True
-        print_coverage_gprp()
         return "100%"
 
     rate = 100 - Decimal(discount)
@@ -179,7 +178,6 @@ def get_plan_rate_percentage(discount: Optional[str]) -> str:
     else:
         Branch_coverage_gprp["get_plan_rate_percentage_3"] = True
         precision = 2
-    print_coverage_gprp()
     return f"{rate:.{precision}f}%"
 
 def print_coverage_gprp():

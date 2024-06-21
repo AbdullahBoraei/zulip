@@ -373,7 +373,7 @@ class ActivityTest(ZulipTestCase):
             result = self.client_get("/activity/remote")
             self.assertEqual(result.status_code, 200)
 
-    def test(self):
+    def test_get_plan_rate_percentage(self):
         input1 = "0"
         input2 = "50"
         input3 = "35.5"
