@@ -120,13 +120,23 @@ def request_event_queue(
     resp = requests_client().post(tornado_url + "/api/v1/events/internal", data=req)
     return resp.json()["queue_id"]
 
+branch_coverage = {
+    "branch_1": 0,
+    "branch_2": 0
+}
 
 def get_user_events(
+
     user_profile: UserProfile, queue_id: str, last_event_id: int
 ) -> List[Dict[str, Any]]:
-    if not settings.USING_TORNADO:
-        return []
+ ##coverage tool:
+    ##2 values, first in case there is no settings setup and the second in case there are
 
+    if not settings.USING_TORNADO:
+        branch_coverage["branch_1"] = 1
+        return []
+    else:
+        branch_coverage["branch_2"] = 1
     tornado_url = get_tornado_url(get_user_tornado_port(user_profile))
     post_data: Dict[str, Any] = {
         "queue_id": queue_id,
@@ -137,6 +147,8 @@ def get_user_events(
         "client": "internal",
     }
     resp = requests_client().post(tornado_url + "/api/v1/events/internal", data=post_data)
+    
+    print(branch_1, branch_2)
     return resp.json()["events"]
 
 

@@ -1,4 +1,5 @@
 import time
+import sys
 from typing import Any, Callable, Dict, List
 from unittest import mock
 from urllib.parse import urlsplit
@@ -42,6 +43,7 @@ from zerver.tornado.event_queue import (
 )
 from zerver.tornado.exceptions import BadEventQueueIdError
 from zerver.tornado.views import get_events
+from zerver.tornado.django_api import get_user_events
 from zerver.views.events_register import _default_all_public_streams, _default_narrow
 
 
@@ -427,7 +429,15 @@ class GetEventsTest(ZulipTestCase):
         self.assertTrue("local_message_id" not in recipient_events[1])
 
     def test_get_user_events(self) -> None:
-        return None
+        sys.modules.pop('django.conf')
+        user_profile = self.example_user("hamlet")
+        email = user_profile.email
+        recipient_user_profile = self.example_user("othello")
+        recipient_email = recipient_user_profile.email
+        self.login_user(user_profile)
+        self.assertEqual(get_user_events(user_profile, "foo", 1), [])
+        from django.conf import settings
+        
     def test_get_events_narrow(self) -> None:
         user_profile = self.example_user("hamlet")
         self.login_user(user_profile)
