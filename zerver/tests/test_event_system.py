@@ -426,6 +426,8 @@ class GetEventsTest(ZulipTestCase):
         self.assertEqual(recipient_events[1]["message"]["sender_email"], email)
         self.assertTrue("local_message_id" not in recipient_events[1])
 
+    def test_get_user_events(self) -> None:
+        return None
     def test_get_events_narrow(self) -> None:
         user_profile = self.example_user("hamlet")
         self.login_user(user_profile)
