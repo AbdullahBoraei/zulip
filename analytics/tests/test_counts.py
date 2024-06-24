@@ -11,6 +11,10 @@ from django.test import override_settings
 from django.utils.timezone import now as timezone_now
 from psycopg2.sql import SQL, Literal
 from typing_extensions import override
+from unittest.mock import patch
+from django.core.management import call_command, CommandError
+from unittest.mock import patch
+from analytics.lib.counts import ALL_COUNT_STATS
 
 from analytics.lib.counts import (
     COUNT_STATS,
@@ -87,6 +91,7 @@ from zilencer.models import (
     RemoteZulipServer,
 )
 from zilencer.views import get_last_id_from_server
+
 
 
 class AnalyticsTestCase(ZulipTestCase):
@@ -1796,6 +1801,47 @@ class TestDeleteStats(AnalyticsTestCase):
             self.assertFalse(table._default_manager.filter(property="to_delete").exists())
             self.assertTrue(table._default_manager.filter(property="to_save").exists())
 
+    @patch('analytics.lib.counts.do_drop_all_analytics_tables')
+    def test_clear_analytics_tables_with_force(self, mock_do_drop_all_analytics_tables):
+        # Test the case when --force is provided
+        call_command('clear_analytics_tables', '--force')
+        mock_do_drop_all_analytics_tables.assert_called_once()
+
+    def test_clear_analytics_tables_without_force(self):
+        # Test the case when --force is not provided
+        with self.assertRaises(CommandError) as cm:
+            call_command('clear_analytics_tables')
+        self.assertEqual(
+            str(cm.exception),
+            "Would delete all data from analytics tables (!); use --force to do so."
+        )
+
+class TestClearSingleStat(ZulipTestCase):
+    def setUp(self):
+        super().setUp()
+        # Setting up a valid property for testing
+        self.valid_property = list(COUNT_STATS.keys())[0] if COUNT_STATS else "test_property"
+        if self.valid_property not in COUNT_STATS:
+            COUNT_STATS[self.valid_property] = "Test description"
+
+    @patch('analytics.lib.counts.do_drop_single_stat')
+    def test_handle_with_valid_property_and_force(self, mock_do_drop_single_stat):
+        call_command('clear_single_stat', '--property', self.valid_property, '--force')
+
+    def test_handle_with_valid_property_without_force(self):
+        with self.assertRaises(CommandError) as cm:
+            call_command('clear_single_stat', '--property', self.valid_property)
+        self.assertEqual(str(cm.exception), "No action taken. Use --force.")
+
+    def test_handle_with_invalid_property(self):
+        with self.assertRaises(CommandError) as cm:
+            call_command('clear_single_stat', '--property', 'invalid_property', '--force')
+        self.assertEqual(str(cm.exception), "Invalid property: invalid_property")
+
+    def tearDown(self):
+        # Clean up after tests
+        if self.valid_property in COUNT_STATS:
+            del COUNT_STATS[self.valid_property]
 
 class TestActiveUsersAudit(AnalyticsTestCase):
     @override
