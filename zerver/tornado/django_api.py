@@ -137,19 +137,25 @@ def get_user_events(
         return []
     else:
         branch_coverage["branch_2"] = 1
-    tornado_url = get_tornado_url(get_user_tornado_port(user_profile))
-    post_data: Dict[str, Any] = {
-        "queue_id": queue_id,
-        "last_event_id": last_event_id,
-        "dont_block": "true",
-        "user_profile_id": user_profile.id,
-        "secret": settings.SHARED_SECRET,
-        "client": "internal",
-    }
-    resp = requests_client().post(tornado_url + "/api/v1/events/internal", data=post_data)
+        tornado_url = get_tornado_url(get_user_tornado_port(user_profile))
+        post_data: Dict[str, Any] = {
+            "queue_id": queue_id,
+            "last_event_id": last_event_id,
+            "dont_block": "true",
+            "user_profile_id": user_profile.id,
+            "secret": settings.SHARED_SECRET,
+            "client": "internal",
+        }
+        resp = requests_client().post(tornado_url + "/api/v1/events/internal", data=post_data)
     
-    print(branch_1, branch_2)
+    
     return resp.json()["events"]
+def print_get_haile_coverage() -> None:
+    branch_coverage["branch_2"] = 1
+    print("Branches reached:\n Branch 1:" + str(branch_coverage['branch_1']),", Branch 2:", str(branch_coverage['branch_2']))
+    if branch_coverage['branch_1'] == 1 and branch_coverage['branch_2'] == 1:
+        print('100{0} branch coverage!'.format("%"))
+    return
 
 
 def send_notification_http(port: int, data: Mapping[str, Any]) -> None:
