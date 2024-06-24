@@ -11,6 +11,8 @@ from zerver.lib.management import ZulipBaseCommand
 class Command(ZulipBaseCommand):
     help = """Clear analytics tables."""
 
+    branch_coverage = {1: False, 2: False, 3: False}
+
     @override
     def add_arguments(self, parser: ArgumentParser) -> None:
         parser.add_argument("--force", action="store_true", help="Actually do it.")
@@ -18,10 +20,26 @@ class Command(ZulipBaseCommand):
 
     @override
     def handle(self, *args: Any, **options: Any) -> None:
-        property = options["property"]
-        if property not in ALL_COUNT_STATS:
-            raise CommandError(f"Invalid property: {property}")
-        if not options["force"]:
-            raise CommandError("No action taken. Use --force.")
+        try:
+            property = options["property"]
+            if property not in ALL_COUNT_STATS:
+                Command.branch_coverage[1] = True
+                Command.branch_coverage[2] = False
+                Command.branch_coverage[3] = False
 
-        do_drop_single_stat(property)
+                raise CommandError(f"Invalid property: {property}")
+            
+            if not options["force"]:
+                Command.branch_coverage[1] = False
+                Command.branch_coverage[2] = True
+                Command.branch_coverage[3] = False
+                raise CommandError("No action taken. Use --force.")
+            
+            Command.branch_coverage[1] = False
+            Command.branch_coverage[2] = False
+            Command.branch_coverage[3] = True
+            do_drop_single_stat(property)
+        finally:
+            print("Branch Coverage Report:")
+            for branch_id, hit in self.branch_coverage.items():
+                print(f"Branch {branch_id}: {'Taken' if hit else 'Not taken'}")
