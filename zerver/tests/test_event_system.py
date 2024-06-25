@@ -443,7 +443,7 @@ class GetEventsTest(ZulipTestCase):
         print_get_haile_coverage()
         settings.USING_TORNADO = True
         result = self.tornado_call(
-            get_events,
+            get_user_events,
             user_profile,
             {
                 "apply_markdown": orjson.dumps(True).decode(),
