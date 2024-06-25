@@ -20,8 +20,18 @@ def get_camo_url(url: str) -> str:
         return url
     return f"{settings.CAMO_URI}{generate_camo_url(url)}"
 
-
+coverage = 0
 def is_camo_url_valid(digest: str, url: str) -> bool:
-    camo_url = generate_camo_url(url)
-    camo_url_digest = camo_url.split("/")[0]
-    return camo_url_digest == digest
+    if url and digest:
+        camo_url = generate_camo_url(url)
+        camo_url_digest = camo_url.split("/")[0]
+        coverage = 1
+        return camo_url_digest == digest
+    else:
+        coverage = 0
+        return False
+
+    
+def print_camo_coverage():
+    if coverage != 0:
+        print("Full coverage")

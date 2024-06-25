@@ -3,6 +3,7 @@ from typing import Any, Callable, Dict, List
 from unittest import mock
 from urllib.parse import urlsplit
 
+import sys
 import orjson
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse
@@ -42,6 +43,9 @@ from zerver.tornado.event_queue import (
 )
 from zerver.tornado.exceptions import BadEventQueueIdError
 from zerver.tornado.views import get_events
+from zerver.tornado.django_api import get_user_events
+from zerver.tornado.django_api import print_get_haile_coverage
+from zerver.tornado.django_api import requests_client
 from zerver.views.events_register import _default_all_public_streams, _default_narrow
 
 
@@ -425,9 +429,45 @@ class GetEventsTest(ZulipTestCase):
         self.assertEqual(recipient_events[1]["type"], "message")
         self.assertEqual(recipient_events[1]["message"]["sender_email"], email)
         self.assertTrue("local_message_id" not in recipient_events[1])
+        
 
     def test_get_user_events(self) -> None:
-        return None
+        
+        user_profile = self.example_user("hamlet")
+        email = user_profile.email
+        recipient_user_profile = self.example_user("othello")
+        recipient_email = recipient_user_profile.email
+        self.login_user(user_profile)
+        get_user_events(user_profile, "foo", 1)
+        self.assertEqual(get_user_events(user_profile, "foo", 1), [])
+        print_get_haile_coverage()
+        settings.USING_TORNADO = True
+        result = self.tornado_call(
+            get_events,
+            user_profile,
+            {
+                "apply_markdown": orjson.dumps(True).decode(),
+                "client_gravatar": orjson.dumps(True).decode(),
+                "event_types": orjson.dumps(["message"]).decode(),
+                "user_client": "website",
+                "dont_block": orjson.dumps(True).decode(),
+            },
+        )
+        
+        queue_id = orjson.loads(result.content)["queue_id"]
+        mock_events = []
+        last_event_id = 1
+        mock_user_event = {
+            "queue_id": queue_id,
+            "last_event_id": last_event_id,
+            "dont_block": "true",
+            "user_profile_id": user_profile.id,
+            "secret": settings.SHARED_SECRET,
+            "client": "internal",
+        }
+        return 
+
+        
     def test_get_events_narrow(self) -> None:
         user_profile = self.example_user("hamlet")
         self.login_user(user_profile)

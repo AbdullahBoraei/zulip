@@ -3,8 +3,11 @@ from collections import OrderedDict
 from typing import Any, Optional, Union
 from unittest import mock
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
+import hashlib
+import hmac
 
 import responses
+from django.conf import settings
 from django.test import override_settings
 from django.utils.html import escape
 from pyoembed.providers import get_provider
@@ -14,6 +17,9 @@ from typing_extensions import override
 from zerver.actions.message_delete import do_delete_messages
 from zerver.lib.cache import cache_delete, cache_get, preview_url_cache_key
 from zerver.lib.camo import get_camo_url
+from zerver.lib.camo import is_camo_url_valid
+from zerver.lib.camo import print_camo_coverage
+from zerver.lib.camo import generate_camo_url
 from zerver.lib.queue import queue_json_publish
 from zerver.lib.test_classes import ZulipTestCase
 from zerver.lib.test_helpers import mock_queue_publish
@@ -557,7 +563,12 @@ class PreviewTestCase(ZulipTestCase):
         )
         msg = self._send_message_with_test_org_url(sender=self.example_user("hamlet"))
         self.assertEqual(msg.rendered_content, with_preview)
-
+    def test_camo_url_valid(self) -> None:
+        camo_url = get_camo_url("http://google.com")
+        camo_url_digest = generate_camo_url(camo_url).split("/")[0]
+        self.assertEqual(is_camo_url_valid(camo_url_digest, camo_url),True)
+        self.assertEqual(is_camo_url_valid(camo_url_digest, "foobar"), False)
+        print_camo_coverage()
     @responses.activate
     @override_settings(CAMO_URI="")
     @override_settings(INLINE_URL_EMBED_PREVIEW=True)
