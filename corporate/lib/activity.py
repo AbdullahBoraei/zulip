@@ -158,19 +158,34 @@ def remote_installation_support_link(hostname: str) -> Markup:
     url = append_url_query_string(support_url, query)
     return Markup('<a href="{url}"><i class="fa fa-gear"></i></a>').format(url=url)
 
+Branch_coverage_gprp = {
+    "get_plan_rate_percentage_1":False,
+    "get_plan_rate_percentage_2":False,
+    "get_plan_rate_percentage_3":False
+}
 
 def get_plan_rate_percentage(discount: Optional[str]) -> str:
     # CustomerPlan.discount is a string field that stores the discount.
+
     if discount is None or discount == "0":
+        Branch_coverage_gprp["get_plan_rate_percentage_1"] = True
         return "100%"
 
     rate = 100 - Decimal(discount)
     if rate * 100 % 100 == 0:
+        Branch_coverage_gprp["get_plan_rate_percentage_2"] = True
         precision = 0
     else:
+        Branch_coverage_gprp["get_plan_rate_percentage_3"] = True
         precision = 2
     return f"{rate:.{precision}f}%"
 
+def print_coverage_gprp():
+    for branch, hit in Branch_coverage_gprp.items():
+        print(f"{branch} was {'hit' if hit else 'not hit'}")
+    Branch_coverage_gprp["get_plan_rate_percentage_1"] = False
+    Branch_coverage_gprp["get_plan_rate_percentage_2"] = False
+    Branch_coverage_gprp["get_plan_rate_percentage_3"] = False
 
 def get_remote_activity_plan_data(
     plan: CustomerPlan,

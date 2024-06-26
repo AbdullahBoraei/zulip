@@ -18,6 +18,8 @@ from zerver.actions.create_user import do_reactivate_user
 from zerver.actions.realm_settings import do_deactivate_realm
 from zerver.actions.user_settings import do_change_user_setting
 from zerver.actions.users import change_user_is_active, do_deactivate_user
+from zerver.lib.templates import display_list
+from zerver.lib.templates import print_coverage_dl
 from zerver.decorator import (
     authenticate_internal_api,
     authenticated_json_view,
@@ -1644,3 +1646,21 @@ class ClientTestCase(ZulipTestCase):
         # client_name has the full name still, though
         self.assertEqual(client_name, "very-long-name-goes-here-and-still-works")
         self.assert_length(queries, 0)
+
+class TestDisplayList(ZulipTestCase):
+    def test_display_list(self):
+        input1 = ["John"]
+        input2 = ["John", "Rick", "Jessica"]
+        input3 = ["May", "Clarkson", "Hammond"]
+
+        result = display_list(input1, 1)
+        print_coverage_dl()
+        assert result == "John"
+
+        result = display_list(input2, 4)
+        print_coverage_dl()
+        assert result == "John, Rick and Jessica"
+
+        result = display_list(input3, 2)
+        print_coverage_dl()
+        assert result == "May, Clarkson and 1 other"
