@@ -151,7 +151,6 @@ def get_user_events(
     
     return resp.json()["events"]
 def print_get_haile_coverage() -> None:
-    branch_coverage["branch_2"] = 1
     print("Branches reached:\n Branch 1:" + str(branch_coverage['branch_1']),", Branch 2:", str(branch_coverage['branch_2']))
     if branch_coverage['branch_1'] == 1 and branch_coverage['branch_2'] == 1:
         print('100{0} branch coverage!'.format("%"))
