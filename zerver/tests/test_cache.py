@@ -24,7 +24,7 @@ from zerver.lib.test_classes import ZulipTestCase
 from zerver.models import UserProfile
 from zerver.models.realms import get_realm
 from zerver.models.users import get_system_bot, get_user, get_user_profile_by_id
-
+from zerver.lib.ccache import der_encode_integer_value
 
 class AppsTest(ZulipTestCase):
     def test_cache_gets_flushed(self) -> None:
@@ -301,3 +301,22 @@ class GenericBulkCachedFetchTest(ZulipTestCase):
             id_fetcher=get_user_email,
         )
         self.assertEqual(result, {})
+
+class ccacheEncodetester(ZulipTestCase):
+    tracker1 = False
+    tracker2 = False
+    tracker3 = False
+    def test(self) -> None:
+        result = der_encode_integer_value(int(0))
+        if result == b"\x00":
+            tracker1 = True
+        with self.assertRaises(TypeError) as ce:
+            #print("make sure it enters")
+            result = der_encode_integer_value(str("0"))
+        self.assertEqual(str(ce.exception), "int")
+        tracker2= True
+        #print("testing it continues")
+        result = der_encode_integer_value(123456)
+        if result == b"\x01\xe2@":
+            tracker3 = True
+
