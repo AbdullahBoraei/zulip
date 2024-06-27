@@ -469,9 +469,19 @@ class TestSendToEmailMirror(ZulipTestCase):
         self.assertEqual(message.recipient.type_id, stream_id)
 
 
+branch_coverage = {
+    "tracker1":False,
+    "tracker2":False,
+    "tracker3":False,
+    "tracker4":False,
+    "tracker5":False
+}
+def coverageRaport(self)-> None:
+    for branch, hit in branch_coverage.items():
+        print(f"{branch} was {'hit' if hit else 'not hit'}")
+
 class TestConvertMattermostData(ZulipTestCase):
     COMMAND_NAME = "convert_mattermost_data"
-
     def test_if_command_calls_do_convert_data(self) -> None:
         with patch(
             "zerver.management.commands.convert_mattermost_data.do_convert_data"
@@ -486,6 +496,55 @@ class TestConvertMattermostData(ZulipTestCase):
             output_dir=os.path.realpath(output_dir),
         )
         self.assertEqual(mock_print.mock_calls, [call("Converting data ...")])
+        branch_coverage["tracker1"] = True
+
+    def test_if_command_calls_handles_None_directory(self) -> None:
+
+        with self.assertRaises(CommandError) as ce:
+            mm_fixtures = self.fixture_file_name("", "mattermost_fixtures")
+            output_dir = None
+            call_command(self.COMMAND_NAME, mm_fixtures, f"--output={output_dir}")
+        expectedcm = "You need to specify --output <output directory>"
+        self.assertEqual(str(ce.exception), expectedcm)
+        branch_coverage["tracker2"] = True
+
+    def test_if_command_calls_handles_noneempty_directory(self) -> None:
+        with self.assertRaises(CommandError) as ce:
+            mm_fixtures = self.fixture_file_name("", "mattermost_fixtures")
+            output_dir = os.path.expanduser('~')
+            call_command(self.COMMAND_NAME, mm_fixtures, f"--output={output_dir}")
+        expectedcm = "Output directory should be empty!"
+        self.assertEqual(str(ce.exception), expectedcm)
+        branch_coverage["tracker3"] = True
+
+    def test_if_command_calls_handles_fake_directory(self) -> None:
+        with self.assertRaises(CommandError) as ce:
+            mm_fixtures = self.fixture_file_name("", "mattermost_fixtures")
+            output_dir = os.path.expanduser('~')
+            output_dir = output_dir + "/testing"
+            
+            call_command(self.COMMAND_NAME, mm_fixtures, f"--output={output_dir}")
+        expectedcm = output_dir + " is not a directory"
+        self.assertEqual(str(ce.exception), expectedcm)
+        branch_coverage["tracker4"] = True
+
+    def test_if_command_calls_handles_None_MatterMost(self) -> None:
+        with self.assertRaises(CommandError) as ce:
+            mm_fixtures = os.path.expanduser('~')
+            mm_fixtures = mm_fixtures + "/testfolderThatShouldNotExist"
+            output_dir = os.path.expanduser('~')
+            output_dir = output_dir + "/testing"
+            
+            call_command(self.COMMAND_NAME, mm_fixtures, f"--output={output_dir}")
+        expectedcm = f"Directory not found: '{mm_fixtures}'"
+        self.assertEqual(str(ce.exception), expectedcm)
+        branch_coverage["tracker5"] = True
+
+    def test_result(self) -> None:
+        coverageRaport(self)
+
+
+
 
 
 @skipUnless(settings.ZILENCER_ENABLED, "requires zilencer")
@@ -642,6 +701,29 @@ class TestSendCustomEmail(ZulipTestCase):
                 [
                     call("Would send the above email to:"),
                     call("  cordelia@zulip.com (zulip)"),
+                    call("  hamlet@zulip.com (zulip)"),
+                ],
+            )
+
+    def test_custom_email(self) -> None:
+        path = "templates/zerver/tests/markdown/test_nested_code_blocks.md"
+        user = self.example_user("hamlet")
+        other_user = self.example_user("cordelia")
+
+        with patch("builtins.print") as mock_print:
+            call_command(
+                self.COMMAND_NAME,
+                "-r=zulip",
+                f"--path={path}",
+                f"-u={user.delivery_email}",
+                "--subject=Test email",
+                "--from-name=zulip@zulip.example.com",
+                "--dry-run",
+            )
+            self.assertEqual(
+                mock_print.mock_calls[1:],
+                [
+                    call("Would send the above email to:"),
                     call("  hamlet@zulip.com (zulip)"),
                 ],
             )
