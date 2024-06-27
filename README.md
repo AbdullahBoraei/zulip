@@ -151,15 +151,15 @@ The original coverage according to the html file was 44%%, however, there were n
 
 ### Overall
 
-Overall Coverage Before Implementing Tests and Code Instrumentation:
+Overall Coverage Before Implementing Tests:
 
 ![img of coverage](readme_img/overall_coverage_before.png)
 
-Overall Coverage After Implementing Tests and Code Instrumentation:
+Overall Coverage After Implementing Tests:
 
 ![img of coverage](readme_img/overall_coverage_after.png)
 
-The overall code coverage did not increase as the number of functions that we tested or improved the tests of were miniscule compared to the overall size of the project and the coverage report does not show the decimals, however, as you can see from the screenshots, the coverage of the two files that Abdullah worked on have increased.
+The overall code coverage did not increase as the number of functions that we tested or improved the tests of were miniscule compared to the overall size of the project and the coverage report does not show the decimals, however, as you can see from the screenshots, the coverage of the two files that Abdullah worked on have increased. There are some differences compared to the screenshots in the explanation above as the overall coverage report was done after code instrumentation, therefore, the NLOC in the files was different.
 
 ## Statement of individual contributions
 
