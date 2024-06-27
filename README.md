@@ -148,6 +148,34 @@ Function after the test implementation
 
 The original coverage according to the html file was 44%%, however, there were no tests that tested the function. After the implementation of the tests, the coverage increased to 100%. The coverage improved because the tests that I had written ensured that the function itself was executed. The different paths/branches are called in each test being “--force”, “valid_property”, without “--force” or a combination of two. By writing tests that cover the different scenarios, more lines of code and more branches of conditional logic are executed.
 
+### Name:Bram Boer
+
+Function 1:command handle for conver_matter_most 
+git link: https://github.com/zulip/zulip/commit/0edb0a6058075a739a041c6eb3139d4dbd69e202
+
+Coverage report
+
+Function 2:der_encode_integer_value
+git link: https://github.com/zulip/zulip/commit/0edb0a6058075a739a041c6eb3139d4dbd69e202
+
+
+### Coverage Improvement
+
+### Individual tests
+
+Function: https://github.com/zulip/zulip/commit/0edb0a6058075a739a041c6eb3139d4dbd69e202
+
+This function has improved the line coverage from 73 % to 91%. The provided coverage should be 100% however the tested function does not manage to correctly handle some of the test causing them to not be included inside the coverage. This causes the branch coverage of the function to only reach 25% if the function correctly handled the test the branch coverage would be 100% 
+
+Function2:Der_encode_integer_value
+git link: https://github.com/zulip/zulip/commit/0edb0a6058075a739a041c6eb3139d4dbd69e202
+
+Coverage before
+
+Coverage after
+
+As this function was previously untested the line and branch coverage in this function go from 0% to 100%. The test written for this function checks the if statement based branch option of the function to see if they return the correct results. As well as checking for a correct output on a valid input.
+
 
 ### Overall
 
