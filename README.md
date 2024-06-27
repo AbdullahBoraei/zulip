@@ -105,7 +105,7 @@ https://github.com/AbdullahBoraei/zulip/commit/11048771a165dbec1759f79ce0af739f8
 The link provides the commit which includes the changes made to both functions that were selected and altered. The first function being clear_analytics_tables and the second function being clear_single_stat.
 
 Screenshot of coverage output of clear_analytics_tables:
-<img width="788" alt="clear_analytics_tables_commandline_coverage" src="https://github.com/juno-soyr/SEP-Group41-Assingment_2/assets/106531816/ea54b143-c26c-4a6d-8b43-6f23e53ddc6b">
+![img of coverage](readme_img/clear_analytics_tables_commandline_coverage.png)
 
 
 The first two tests were those that were made by me and tested the function clear_analytics tables. The following two tests were to test helper functions that were related to the function but did not specifically call upon the function and is the reason why there is no branch coverage report output to the command line.
@@ -114,7 +114,7 @@ clear_single_stat.py
 
 https://github.com/AbdullahBoraei/zulip/commit/11048771a165dbec1759f79ce0af739f886e2605
 
-<img width="829" alt="clear_single_stat_commandline_coverage" src="https://github.com/juno-soyr/SEP-Group41-Assingment_2/assets/106531816/4a903be5-a8b6-4f49-8f18-525edcd0fd7b">
+![img of coverage](readme_img/clear_single_stat_commandline_coverage.png)
 The function clear_single_stat did not have any tests previously, therefore, all the tests shown in the screenshot of the command line were made by me. The branch coverage report for each test shows which branch was taken in the specific case.
 
 ## Coverage improvement
@@ -125,12 +125,12 @@ clear_analytics_tables_with_force and clear_analytics_tables_without_force
 
 https://github.com/AbdullahBoraei/zulip/commit/310093043374ef6b9de4acc09f7df1c8dd0bef7f
 
-<img width="1440" alt="clear_analytics_tables_coverage_before" src="https://github.com/juno-soyr/SEP-Group41-Assingment_2/assets/106531816/a8c0d028-9ea4-475f-a8bf-e404fc4f9fb7">
+![img of coverage](readme_img/clear_analytics_tables_coverage_before.png)
 
 Function before instrumentation and test code implementation. 
 
 
-<img width="1438" alt="clear_analytics_tables_coverage_after" src="https://github.com/juno-soyr/SEP-Group41-Assingment_2/assets/106531816/8177c2a8-e1b9-4cb6-b2f4-3ce945d17c01">
+![img of coverage](readme_img/clear_analytics_tables_coverage_after.png)
 
 Function after the test implementation but before code instrumentation.
 
@@ -140,10 +140,10 @@ ClearSingleStat test class
 
 https://github.com/AbdullahBoraei/zulip/commit/310093043374ef6b9de4acc09f7df1c8dd0bef7f
 
-<img width="1423" alt="clear_single_stat_before" src="https://github.com/juno-soyr/SEP-Group41-Assingment_2/assets/106531816/c0deba44-4a50-44c8-a1cf-dfb41d93565d">
+![img of coverage](readme_img/clear_single_stat_coverage_before.png)
 Function before test code implementation. 
 
-<img width="1423" alt="clear_single_stat_coverage_after" src="https://github.com/juno-soyr/SEP-Group41-Assingment_2/assets/106531816/fe919add-0bad-4144-93d7-4e241ab67ab8">
+![img of coverage](readme_img/clear_single_stat_coverage_after.png)
 Function after the test implementation
 
 The original coverage according to the html file was 44%%, however, there were no tests that tested the function. After the implementation of the tests, the coverage increased to 100%. The coverage improved because the tests that I had written ensured that the function itself was executed. The different paths/branches are called in each test being “--force”, “valid_property”, without “--force” or a combination of two. By writing tests that cover the different scenarios, more lines of code and more branches of conditional logic are executed.
@@ -153,9 +153,13 @@ The original coverage according to the html file was 44%%, however, there were n
 
 Overall Coverage Before Implementing Tests and Code Instrumentation:
 
-<img width="1440" alt="overall_coverage_before" src="https://github.com/juno-soyr/SEP-Group41-Assingment_2/assets/106531816/30811b43-caec-4fa5-8a27-34240c63b3f6">
+![img of coverage](readme_img/overall_coverage_before.png)
 
-<Provide a screenshot of the new coverage results by running the existing tool using all test modifications made by the group>
+Overall Coverage After Implementing Tests and Code Instrumentation:
+
+![img of coverage](readme_img/overall_coverage_after.png)
+
+The overall code coverage did not increase as the number of functions that we tested or improved the tests of were miniscule compared to the overall size of the project and the coverage report does not show the decimals.
 
 ## Statement of individual contributions
 
