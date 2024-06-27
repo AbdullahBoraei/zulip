@@ -151,7 +151,9 @@ The original coverage according to the html file was 44%%, however, there were n
 
 ### Overall
 
-<Provide a screenshot of the old coverage results by running an existing tool (the same as you already showed above)>
+Overall Coverage Before Implementing Tests and Code Instrumentation:
+
+<img width="1440" alt="overall_coverage_before" src="https://github.com/juno-soyr/SEP-Group41-Assingment_2/assets/106531816/30811b43-caec-4fa5-8a27-34240c63b3f6">
 
 <Provide a screenshot of the new coverage results by running the existing tool using all test modifications made by the group>
 
