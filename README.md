@@ -206,3 +206,6 @@ Haileselassie Gaspar: Setup the coverage for get_user_events and is_camo_url_val
 Atif Mehmood: Setup instrumentation for the get_plan_rate_percentage and display_list functions and created tests to improve coverage for them.
 
 Abdullah Mohamed Elsayed Boraei: Setup the branch coverage report output to the command line for clear_analytics_tables.py and clear_single_stat.py, and implemented tests to ensure all branches are reachable and work as intended.
+
+Bram Boer: Setup the coverage for conver_mattermost_data and der_encode_integer_value, as well as implemented a new test for both.
+
