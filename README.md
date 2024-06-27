@@ -153,10 +153,13 @@ The original coverage according to the html file was 44%%, however, there were n
 Function 1:command handle for conver_matter_most 
 git link: https://github.com/zulip/zulip/commit/0edb0a6058075a739a041c6eb3139d4dbd69e202
 
-Coverage report
+Coverage report:
+![img of coverage](readme_img/bram_function1.png)
+
 
 Function 2:der_encode_integer_value
 git link: https://github.com/zulip/zulip/commit/0edb0a6058075a739a041c6eb3139d4dbd69e202
+![img of coverage](readme_img/bram_function2.png)
 
 
 ### Coverage Improvement
@@ -164,15 +167,22 @@ git link: https://github.com/zulip/zulip/commit/0edb0a6058075a739a041c6eb3139d4d
 ### Individual tests
 
 Function: https://github.com/zulip/zulip/commit/0edb0a6058075a739a041c6eb3139d4dbd69e202
+![img of coverage](readme_img/bram_test1_before.png)
+
+![img of coverage](readme_img/bram_test1_after.png)
+
 
 This function has improved the line coverage from 73 % to 91%. The provided coverage should be 100% however the tested function does not manage to correctly handle some of the test causing them to not be included inside the coverage. This causes the branch coverage of the function to only reach 25% if the function correctly handled the test the branch coverage would be 100% 
 
 Function2:Der_encode_integer_value
 git link: https://github.com/zulip/zulip/commit/0edb0a6058075a739a041c6eb3139d4dbd69e202
 
-Coverage before
+Coverage before:
+![img of coverage](readme_img/bram_test2_before.png)
 
-Coverage after
+Coverage after:
+![img of coverage](readme_img/bram_test2_after.png)
+
 
 As this function was previously untested the line and branch coverage in this function go from 0% to 100%. The test written for this function checks the if statement based branch option of the function to see if they return the correct results. As well as checking for a correct output on a valid input.
 
