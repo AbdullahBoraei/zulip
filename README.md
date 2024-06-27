@@ -160,3 +160,5 @@ Overall Coverage Before Implementing Tests and Code Instrumentation:
 ## Statement of individual contributions
 
 Haileselassie Gaspar: Setup the coverage for get_user_events and is_camo_url_valid, as well as implemented a new test for both.
+
+Abdullah Mohamed Elsayed Boraei: Setup the branch coverage report output to the command line for clear_analytics_tables.py and clear_single_stat.py, and implemented tests to ensure all branches are reachable and work as intended.
