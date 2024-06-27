@@ -85,7 +85,7 @@ commit: https://github.com/AbdullahBoraei/zulip/commit/08117ec1ce0c1f91762a36b5a
 commit: https://github.com/AbdullahBoraei/zulip/commit/ff89f290b3bed7915df3f18a520e97a176bd0f11
 The test was accidentally included within the same commit as the instrumentation, that's why this link and the link for the commit from function 1 are the same.
 
-![img of improved coverage](readme_img/GPRP_after/png)
+![img of improved coverage](readme_img/GPRP_after.png)
 
 The coverage went up from 33% to 100%. It was improved, because there wasn’t a dedicated test for the function at first. The old results were caused by the function being used for other tests, which explains why there wasn’t full coverage. 
 
