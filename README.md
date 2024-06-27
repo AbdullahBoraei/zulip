@@ -159,7 +159,7 @@ Overall Coverage After Implementing Tests and Code Instrumentation:
 
 ![img of coverage](readme_img/overall_coverage_after.png)
 
-The overall code coverage did not increase as the number of functions that we tested or improved the tests of were miniscule compared to the overall size of the project and the coverage report does not show the decimals.
+The overall code coverage did not increase as the number of functions that we tested or improved the tests of were miniscule compared to the overall size of the project and the coverage report does not show the decimals, however, as you can see from the screenshots, the coverage of the two files that Abdullah worked on have increased.
 
 ## Statement of individual contributions
 
