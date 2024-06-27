@@ -147,7 +147,7 @@ ClearSingleStat test class
 
 https://github.com/AbdullahBoraei/zulip/commit/310093043374ef6b9de4acc09f7df1c8dd0bef7f
 
-<img width="603" alt="clear_single_stat_before" src="https://github.com/juno-soyr/SEP-Group41-Assingment_2/assets/106531816/c0deba44-4a50-44c8-a1cf-dfb41d93565d">
+<img width="1423" alt="clear_single_stat_before" src="https://github.com/juno-soyr/SEP-Group41-Assingment_2/assets/106531816/c0deba44-4a50-44c8-a1cf-dfb41d93565d">
 Function before test code implementation. 
 
 <img width="1423" alt="clear_single_stat_coverage_after" src="https://github.com/juno-soyr/SEP-Group41-Assingment_2/assets/106531816/fe919add-0bad-4144-93d7-4e241ab67ab8">
