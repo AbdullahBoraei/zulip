@@ -133,9 +133,12 @@ clear_analytics_tables_with_force and clear_analytics_tables_without_force
 https://github.com/AbdullahBoraei/zulip/commit/310093043374ef6b9de4acc09f7df1c8dd0bef7f
 
 <img width="1440" alt="clear_analytics_tables_coverage_before" src="https://github.com/juno-soyr/SEP-Group41-Assingment_2/assets/106531816/a8c0d028-9ea4-475f-a8bf-e404fc4f9fb7">
+
 Function before instrumentation and test code implementation. 
 
+
 <img width="1438" alt="clear_analytics_tables_coverage_after" src="https://github.com/juno-soyr/SEP-Group41-Assingment_2/assets/106531816/8177c2a8-e1b9-4cb6-b2f4-3ce945d17c01">
+
 Function after the test implementation but before code instrumentation.
 
 The original coverage according to the html file was 81%, however, there were no tests that tested the function. After the implementation of the tests, the coverage increased to 100%. The coverage improved because the tests that I had written ensured that the function itself was executed. The different paths/branches are called in each test that being “--force” or without “--force”. By writing tests that cover the different scenarios, more lines of code and more branches of conditional logic are executed.
