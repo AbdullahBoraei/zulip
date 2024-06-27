@@ -45,23 +45,18 @@ For each of the functions under 80% that we chose to instrumentalize, we added c
   get_user_events()
   is_camo_url_valid()
   [commit](https://github.com/zulip/zulip/commit/8a1cf394537804103b9ab3ad69fed6404d470eff)
+  
 
 ## Coverage improvement
 
 ### Individual tests
-
-<The following is supposed to be repeated for each group member>
 
 ### Name: Haileselassie Gaspar
 
 <Test 1>
 
 [commit]( https://github.com/AbdullahBoraei/zulip/commit/4451942f004c323de6547e7460acf9f5ba3d2c23 )
-
-<Provide a screenshot of the old coverage 
-results (the same as you already showed above)>
-
-<Provide a screenshot of the new coverage results>
+![img of coverage](readme_img/changes_on_django_api.png)
 
 100% coverage improvement, by creating a new test for a full function.
 
@@ -69,9 +64,8 @@ results (the same as you already showed above)>
 
 
 [commit](https://github.com/AbdullahBoraei/zulip/commit/05be9d7e7b741b07dfcfd6d894296ff9415b1aea)
-
-	100% coverage improvement, again because the function was not covered by any test.
-
+100% coverage improvement, again because the function was not covered by any test.
+![img of coverage](readme_img/is_camor_url_valid_coverage.png)
 ### Name: Atif
 
 Function 1: get_plan_rate_percentage
