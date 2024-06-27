@@ -41,7 +41,7 @@ For each of the functions under 80% that we chose to instrumentalize, we added c
 
 <Provide the same kind of information provided for Function 1>
 
-Haileselassie Gaspar
+### Haileselassie Gaspar
 	`get_user_events` : [commit](https://github.com/zulip/zulip/commit/a6a13be07609e07b462140eb5f7180dccea5f4e1)
 
 
@@ -73,7 +73,7 @@ results (the same as you already showed above)>
 
 	100% coverage improvement, again because the function was not covered by any test.
 
-Name: Atif
+### Name: Atif
 
 Function 1: get_plan_rate_percentage
 
@@ -104,7 +104,7 @@ Commit: https://github.com/AbdullahBoraei/zulip/commit/8498d7507576e9df0f15c7229
 
 The coverage went from 33% to 100%, the same as the previous function. Again, because there wasn’t a dedicated test for it.
 
-Abdullah Mohamed Elsayed Boraei
+### Abdullah Mohamed Elsayed Boraei
 
 clear_analytics_tables.py
 
