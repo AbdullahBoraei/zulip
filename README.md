@@ -65,7 +65,7 @@ For each of the functions under 80% that we chose to instrumentalize, we added c
 
 [commit](https://github.com/AbdullahBoraei/zulip/commit/05be9d7e7b741b07dfcfd6d894296ff9415b1aea)
 100% coverage improvement, again because the function was not covered by any test.
-![img of coverage](readme_img/is_camor_url_valid_coverage.png)
+![img of coverage](readme_img/is_camo_url_valid_coverage.png)
 ### Name: Atif
 
 Function 1: get_plan_rate_percentage
