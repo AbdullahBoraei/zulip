@@ -159,4 +159,4 @@ Overall Coverage Before Implementing Tests and Code Instrumentation:
 
 ## Statement of individual contributions
 
-<Write what each group member did>
+Haileselassie Gaspar: Setup the coverage for get_user_events and is_camo_url_valid, as well as implemented a new test for both.
