@@ -140,7 +140,7 @@ ClearSingleStat test class
 
 https://github.com/AbdullahBoraei/zulip/commit/310093043374ef6b9de4acc09f7df1c8dd0bef7f
 
-![img of coverage](readme_img/clear_single_stat_coverage_before.png)
+![img of coverage](readme_img/clear_single_stat_before.png)
 Function before test code implementation. 
 
 ![img of coverage](readme_img/clear_single_stat_coverage_after.png)
