@@ -42,10 +42,9 @@ For each of the functions under 80% that we chose to instrumentalize, we added c
 <Provide the same kind of information provided for Function 1>
 
 ### Haileselassie Gaspar
-	`get_user_events` : [commit](https://github.com/zulip/zulip/commit/a6a13be07609e07b462140eb5f7180dccea5f4e1)
-
-
-	`is_camo_url_valid` : [commit](https://github.com/zulip/zulip/commit/8a1cf394537804103b9ab3ad69fed6404d470eff)
+  `get_user_events`
+  `is_camo_url_valid`
+  [commit](https://github.com/zulip/zulip/commit/8a1cf394537804103b9ab3ad69fed6404d470eff)
 
 ## Coverage improvement
 
@@ -53,11 +52,11 @@ For each of the functions under 80% that we chose to instrumentalize, we added c
 
 <The following is supposed to be repeated for each group member>
 
-Haileselassie Gaspar
+### Name: Haileselassie Gaspar
 
 <Test 1>
 
-[commit](https://github.com/AbdullahBoraei/zulip/commit/4451942f004c323de6547e7460acf9f5ba3d2c23)
+[commit]( https://github.com/AbdullahBoraei/zulip/commit/4451942f004c323de6547e7460acf9f5ba3d2c23 )
 
 <Provide a screenshot of the old coverage 
 results (the same as you already showed above)>
