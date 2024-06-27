@@ -78,7 +78,7 @@ Function 2: display_list
 
 commit: https://github.com/AbdullahBoraei/zulip/commit/08117ec1ce0c1f91762a36b5aac0714435f313ba
 
-![img of coverage](readme_img/DL_before.png)
+![img of coverage](readme_img/DPL_before.png)
 
 <Test 1>
 
@@ -93,7 +93,7 @@ The coverage went up from 33% to 100%. It was improved, because there wasn’t a
 
 Commit: https://github.com/AbdullahBoraei/zulip/commit/8498d7507576e9df0f15c7229970818d1ff9012b
 
-![img of improved coverage](readme_img/DL_after.png)
+![img of improved coverage](readme_img/DPL_after.png)
 
 The coverage went from 33% to 100%, the same as the previous function. Again, because there wasn’t a dedicated test for it.
 
@@ -164,5 +164,7 @@ The overall code coverage did not increase as the number of functions that we te
 ## Statement of individual contributions
 
 Haileselassie Gaspar: Setup the coverage for get_user_events and is_camo_url_valid, as well as implemented a new test for both.
+
+Atif Mehmood: Setup instrumentation for the get_plan_rate_percentage and display_list functions and created tests to improve coverage for them.
 
 Abdullah Mohamed Elsayed Boraei: Setup the branch coverage report output to the command line for clear_analytics_tables.py and clear_single_stat.py, and implemented tests to ensure all branches are reachable and work as intended.
