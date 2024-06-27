@@ -473,7 +473,8 @@ branch_coverage = {
     "tracker1":False,
     "tracker2":False,
     "tracker3":False,
-    "tracker4":False
+    "tracker4":False,
+    "tracker5":False
 }
 def coverageRaport(self)-> None:
     for branch, hit in branch_coverage.items():
@@ -526,6 +527,18 @@ class TestConvertMattermostData(ZulipTestCase):
         expectedcm = output_dir + " is not a directory"
         self.assertEqual(str(ce.exception), expectedcm)
         branch_coverage["tracker4"] = True
+
+    def test_if_command_calls_handles_None_MatterMost(self) -> None:
+        with self.assertRaises(CommandError) as ce:
+            mm_fixtures = os.path.expanduser('~')
+            mm_fixtures = mm_fixtures + "/testfolderThatShouldNotExist"
+            output_dir = os.path.expanduser('~')
+            output_dir = output_dir + "/testing"
+            
+            call_command(self.COMMAND_NAME, mm_fixtures, f"--output={output_dir}")
+        expectedcm = f"Directory not found: '{mm_fixtures}'"
+        self.assertEqual(str(ce.exception), expectedcm)
+        branch_coverage["tracker5"] = True
 
     def test_result(self) -> None:
         coverageRaport(self)
