@@ -302,21 +302,28 @@ class GenericBulkCachedFetchTest(ZulipTestCase):
         )
         self.assertEqual(result, {})
 
+
+branch_coverage = {
+    "tracker1":False,
+    "tracker2":False,
+    "tracker3":False
+}
+
+def coverageRaport(self)-> None:
+    for branch, hit in branch_coverage.items():
+        print(f"{branch} was {'hit' if hit else 'not hit'}")
+
 class ccacheEncodetester(ZulipTestCase):
-    tracker1 = False
-    tracker2 = False
-    tracker3 = False
-    def test(self) -> None:
+    def test_cache(self) -> None:
         result = der_encode_integer_value(int(0))
         if result == b"\x00":
-            tracker1 = True
+            branch_coverage["tracker1"] = True
         with self.assertRaises(TypeError) as ce:
-            #print("make sure it enters")
             result = der_encode_integer_value(str("0"))
         self.assertEqual(str(ce.exception), "int")
-        tracker2= True
-        #print("testing it continues")
+        branch_coverage["tracker2"] = True
         result = der_encode_integer_value(123456)
         if result == b"\x01\xe2@":
-            tracker3 = True
-
+            branch_coverage["tracker3"] = True
+    def test_result(self) -> None:
+        coverageRaport(self)

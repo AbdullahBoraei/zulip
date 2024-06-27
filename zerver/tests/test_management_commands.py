@@ -469,9 +469,18 @@ class TestSendToEmailMirror(ZulipTestCase):
         self.assertEqual(message.recipient.type_id, stream_id)
 
 
+branch_coverage = {
+    "tracker1":False,
+    "tracker2":False,
+    "tracker3":False,
+    "tracker4":False
+}
+def coverageRaport(self)-> None:
+    for branch, hit in branch_coverage.items():
+        print(f"{branch} was {'hit' if hit else 'not hit'}")
+
 class TestConvertMattermostData(ZulipTestCase):
     COMMAND_NAME = "convert_mattermost_data"
-
     def test_if_command_calls_do_convert_data(self) -> None:
         with patch(
             "zerver.management.commands.convert_mattermost_data.do_convert_data"
@@ -486,6 +495,7 @@ class TestConvertMattermostData(ZulipTestCase):
             output_dir=os.path.realpath(output_dir),
         )
         self.assertEqual(mock_print.mock_calls, [call("Converting data ...")])
+        branch_coverage["tracker1"] = True
 
     def test_if_command_calls_handles_None_directory(self) -> None:
 
@@ -495,6 +505,7 @@ class TestConvertMattermostData(ZulipTestCase):
             call_command(self.COMMAND_NAME, mm_fixtures, f"--output={output_dir}")
         expectedcm = "You need to specify --output <output directory>"
         self.assertEqual(str(ce.exception), expectedcm)
+        branch_coverage["tracker2"] = True
 
     def test_if_command_calls_handles_noneempty_directory(self) -> None:
         with self.assertRaises(CommandError) as ce:
@@ -503,17 +514,24 @@ class TestConvertMattermostData(ZulipTestCase):
             call_command(self.COMMAND_NAME, mm_fixtures, f"--output={output_dir}")
         expectedcm = "Output directory should be empty!"
         self.assertEqual(str(ce.exception), expectedcm)
+        branch_coverage["tracker3"] = True
 
     def test_if_command_calls_handles_fake_directory(self) -> None:
         with self.assertRaises(CommandError) as ce:
             mm_fixtures = self.fixture_file_name("", "mattermost_fixtures")
             output_dir = os.path.expanduser('~')
-            output_dir = output_dir + "/poopediescoop"
+            output_dir = output_dir + "/testing"
             
             call_command(self.COMMAND_NAME, mm_fixtures, f"--output={output_dir}")
         expectedcm = output_dir + " is not a directory"
         self.assertEqual(str(ce.exception), expectedcm)
-        #needs coverage tracking
+        branch_coverage["tracker4"] = True
+
+    def test_result(self) -> None:
+        coverageRaport(self)
+
+
+
 
 
 @skipUnless(settings.ZILENCER_ENABLED, "requires zilencer")
