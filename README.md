@@ -42,8 +42,8 @@ For each of the functions under 80% that we chose to instrumentalize, we added c
 <Provide the same kind of information provided for Function 1>
 
 ### Haileselassie Gaspar
-  `get_user_events`
-  `is_camo_url_valid`
+  get_user_events()
+  is_camo_url_valid()
   [commit](https://github.com/zulip/zulip/commit/8a1cf394537804103b9ab3ad69fed6404d470eff)
 
 ## Coverage improvement
